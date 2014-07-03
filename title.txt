@@ -37,6 +37,59 @@ k_sunni = {
 				is_titular = no
 			}
 		}
-
+		495 = { # Kaliopolis
+			owner = {
+				OR = {
+					is_liege_or_above = ROOT
+					character = ROOT
+				}
+			}
+		}
+	}
+	
+	d_khorasan = {
+		color={ 99 150 9 }
+		color2={ 255 255 255 }
+		
+		capital = 632 # Khorasan / Tus
+		
+		c_tus = {
+			color={ 103 154 13 }
+			color2={ 255 255 255 }
+			
+			b_bojnurd = {
+				holy_site = zoroastrian # The Great Fire of Adur Burzen-Mehr
+				holy_site = yazidi
+			}
+			b_shervan = {
+				norwegian = "Bamborg"
+				danish = "Bamborg"
+				swedish = "Bamborg"
+				norse = "Bamborg"
+			}
+			b_mashhad = {
+			}
+			b_hasanabad = {
+			}
+			b_ghaisar = {
+			}
+			b_isfarayen = {
+			}
+			b_fagdatdezh = {
+			}
+			b_solak = {
+			}
+			b_tus = {
+			}
+		}
+	}
+	
+	male_names = {
+		John Gregory Benedict Clement Innocent Leo Pius Stephen Boniface Urban Alexander Adrian Paul
+		Celestine Martin Nicholas Sixtus Felix Sergius Anastasius Honorius Eugene Sylvester Victor
+		Lucius Callixtus Julius Pelagius Adeodatus Theodore Marinus Agapetus Damasus Paschal
+		Gelasius Marcellus "John Paul" Anacletus Evaristus Telesphorus Hyginus Anicetus Mark Hilarius 
+		Simplicius Symmachus Hormisdas Silverius Vigilius Sabinian Severinus Vitalian Donus Agatho
+		Conon Sisinnius Constantine Zachary Valentine Formosus Romanus Lando
 	}
 }
