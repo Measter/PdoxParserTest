@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,9 +29,12 @@ namespace PdoxParserTest
 		{
 			const string filename = @"title.txt";
 
+			Stopwatch sw;
 			using( FileStream fs = new FileStream( filename, FileMode.Open ) )
 			{
+				sw = Stopwatch.StartNew();
 				ParadoxParser.Parse( fs, ParseOption );
+				sw.Stop();
 			}
 		}
 
@@ -43,14 +47,17 @@ namespace PdoxParserTest
 				if( tag == "color" || tag == "color2" )
 				{
 					opt = new ColourOption( tag, parser.ReadStringList().ParseColour() );
+				} else if( tag == "male_names" || tag == "female_names" )
+				{
+					opt = new StringListOption( tag, parser.ReadStringList() );
+				} else if( tag == "data" )
+				{
+					opt = new IntListOption( tag, parser.ReadIntList() );
 				} else
 				{
-
 					opt = new GroupOption( tag );
 					m_lastGroup.Push( opt );
-
 					parser.Parse( ParseOption );
-
 					m_lastGroup.Pop();
 				}
 			} else
