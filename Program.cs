@@ -21,14 +21,14 @@ namespace PdoxParserTest
 	internal class GenericParser
 	{
 		public List<Option> Options = new List<Option>();
-		
+
 		private Stack<Option> m_lastGroup = new Stack<Option>();
-		
+
 		public void Run()
 		{
-			const string filename = @"C:\SteamGames\SteamApps\common\Europa Universalis IV\events\Catholic.txt";
-			
-			using ( FileStream fs = new FileStream( filename, FileMode.Open ) )
+			const string filename = @"title.txt";
+
+			using( FileStream fs = new FileStream( filename, FileMode.Open ) )
 			{
 				ParadoxParser.Parse( fs, ParseOption );
 			}
@@ -38,20 +38,27 @@ namespace PdoxParserTest
 		{
 			Option opt;
 
-			if ( parser.NextIsBracketed() )
+			if( parser.NextIsBracketed() )
 			{
-				opt = new GroupOption( tag );
-				m_lastGroup.Push( opt );
+				if( tag == "color" || tag == "color2" )
+				{
+					opt = new ColourOption( tag, parser.ReadStringList().ParseColour() );
+				} else
+				{
 
-				parser.Parse( ParseOption );
+					opt = new GroupOption( tag );
+					m_lastGroup.Push( opt );
 
-				m_lastGroup.Pop();
+					parser.Parse( ParseOption );
+
+					m_lastGroup.Pop();
+				}
 			} else
 			{
 				opt = Option.Parse( tag, parser.ReadString() );
 			}
 
-			if ( m_lastGroup.Count == 0 )
+			if( m_lastGroup.Count == 0 )
 			{
 				Options.Add( opt );
 			} else

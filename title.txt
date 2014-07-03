@@ -1,0 +1,42 @@
+k_sunni = {
+	color = { 62 160 40 }
+	color2 = { 220 220 0 }
+	capital = 719
+	dignity = 100
+	creation_requires_capital = no
+	title = "CALIPH"
+	foa = "CALIPH_FOA"
+	title_female = "CALIPHA"
+	gain_effect = {
+		primary_title = { copy_title_laws = d_sunni }
+		
+		any_demesne_title = {
+			limit = {
+				tier = DUKE
+				OR = {
+					k_sunni = { is_titular = yes }
+					FROM = { has_character_flag = creating_title_loop }
+				}
+			}
+			de_jure_liege = k_sunni
+			hidden_tooltip = { FROM = {	set_character_flag = creating_title_loop } }
+		}
+		hidden_tooltip = { clr_character_flag = creating_title_loop }
+
+	}
+	allow = {
+		OR = {
+			AND = {
+				culture_group = arabic
+				religion_group = muslim
+			
+				primary_title = { title = d_sunni }
+				num_of_duke_titles = 4
+			}
+			k_sunni = {
+				is_titular = no
+			}
+		}
+
+	}
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 
 namespace PdoxParserTest
@@ -14,7 +15,7 @@ namespace PdoxParserTest
 		Integer
 	}
 
-	[DebuggerDisplay( "{GetIDString} = {GetValueString}" )]
+	[DebuggerDisplay( "Tag: {GetIDString}, Data: {GetValueString}" )]
 	abstract class Option
 	{
 		public readonly OptionType Type;
@@ -55,6 +56,7 @@ namespace PdoxParserTest
 		}
 	}
 
+	[DebuggerDisplay( "Tag: {m_id}, SubOptions: {SubOptions.Count}" )]
 	class GroupOption : Option
 	{
 		public List<Option> SubOptions;
@@ -84,6 +86,7 @@ namespace PdoxParserTest
 		}
 	}
 
+	[DebuggerDisplay( "Tag: {m_id}, Data: {m_value}" )]
 	class StringOption : Option
 	{
 		private readonly string m_id;
@@ -114,6 +117,7 @@ namespace PdoxParserTest
 		}
 	}
 
+	[DebuggerDisplay( "Tag: {m_id}, Data: {m_value}" )]
 	class BoolOption : Option
 	{
 		private readonly string m_id;
@@ -152,6 +156,7 @@ namespace PdoxParserTest
 		}
 	}
 
+	[DebuggerDisplay( "Tag: {m_id}, Data: {m_value}" )]
 	class IntegerOption : Option
 	{
 		private readonly string m_id;
@@ -189,6 +194,7 @@ namespace PdoxParserTest
 		}
 	}
 
+	[DebuggerDisplay( "Tag: {m_id}, Data: {m_value}" )]
 	class FloatOption : Option
 	{
 		private readonly string m_id;
@@ -222,6 +228,44 @@ namespace PdoxParserTest
 			get
 			{
 				return m_value.ToString( CultureInfo.InvariantCulture );
+			}
+		}
+	}
+
+	[DebuggerDisplay( "Tag: {m_id}, Data: {m_value}" )]
+	class ColourOption : Option
+	{
+		private readonly string m_id;
+		private readonly Color m_value;
+
+		public ColourOption( string id, Color rgb )
+			: base( OptionType.Float )
+		{
+			m_id = id;
+			m_value = rgb;
+		}
+
+		public Color Value
+		{
+			get
+			{
+				return m_value;
+			}
+		}
+
+		public override string GetIDString
+		{
+			get
+			{
+				return m_id;
+			}
+		}
+
+		public override string GetValueString
+		{
+			get
+			{
+				return m_value.ToString();
 			}
 		}
 	}
